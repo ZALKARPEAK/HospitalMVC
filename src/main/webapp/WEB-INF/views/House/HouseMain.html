@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Main page</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/premium-vector/space-and-planet-background-planets-surface-with-craters-stars-and-comets-in-dark-space_53562-8705.jpg?size=626&ext=jpg&ga=GA1.1.1810574659.1699621957&semt=ais');
+            background-size: cover;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-outline-success {
+            color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 5px;
+            width: 50%;
+        }
+
+        .search-input {
+            border: none;
+            flex: 1;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .search-button {
+            background-color: #28a745;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .search-button:hover {
+            background-color: #218838;
+            cursor: pointer;
+        }
+
+        /* Additional styles for card layout */
+        .card-agency {
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-delete,
+        .btn-update {
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="search-container">
+    <form class="search-form" th:action="@{/HouseMain/search}" th:method="GET">
+        <input class="search-input" type="search" name="id" placeholder="Search">
+        <button class="search-button" type="submit">Search</button>
+    </form>
+</div>
+<div class="card mb-3" style="max-width: 540px;" th:each="house:${house}">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="..." class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${house.getHouseType()}">House type</h5>
+                <h5 class="card-title" th:text="${house.getAddress()}">Address</h5>
+                <p class="card-text" th:text="${house.getPrice()}">Price</p>
+                <p class="card-text" th:text="${house.getRoom()}">Room</p>
+                <p class="card-text" th:text="${house.getCountry()}">Country</p>
+                <p class="card-text" th:text="${house.getDescription()}">Description</p>
+                <p class="card-text" th:text="${house.isBooked()}">Is booked</p>
+
+
+                    <a th:href="@{/HouseMain/{id}/update(id=${house.getId()})}" class="btn btn-success mr-2">Update</a>
+
+                    <form id="deleteForm" th:method="DELETE" th:action="@{/HouseMain/{id}/delete(id=${house.getId()})}">
+                        <button type="submit" class="btn btn-danger" onclick="confirmDelete(event)">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="/HouseMain/new" class="btn btn-success">Create</a><br>
+
+<script>
+    function confirmDelete(eve) {
+        event.preventDefault();
+        if (confirm("Are you delete?")) {
+            document.getElementById("deleteForm").submit();
+        }
+    }
+</script>
+</body>
+</html>
+
