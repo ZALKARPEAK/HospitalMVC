@@ -24,9 +24,10 @@ public class HouseApi {
         return "/House/HouseMain";
     }
 
-    @GetMapping("/new")
-    public String createHouseForm(Model model) {
+    @GetMapping("/new/{agencyId}")
+    public String createHouseForm(@PathVariable("agencyId") Long agencyId, Model model) {
         model.addAttribute("newHouse", new House());
+        model.addAttribute("agencyId", agencyId);
         return "/House/createHouse";
     }
 
@@ -35,7 +36,6 @@ public class HouseApi {
         houseService.saveHouse(agencyId, house);
         return "redirect:/HouseMain";
     }
-
 
     @GetMapping("/{houseId}/update")
     private String edit(@PathVariable("houseId") Long houseId, Model model, @PathVariable Long agencyId) {
@@ -53,7 +53,7 @@ public class HouseApi {
     }
 
 
-    @PostMapping("/book/{agencyId}")
+    /*@PostMapping("/book/{agencyId}")
     public String bookHouse(@PathVariable("agencyId") Long agencyId, @ModelAttribute("bookingApi") BookingApi bookingApi) {
         houseService.bookHouse(bookingApi);
         return "redirect:/HouseMain";
@@ -63,5 +63,5 @@ public class HouseApi {
     public String unbookHouse(@PathVariable("agencyId") Long agencyId, @ModelAttribute("bookingApi") BookingApi bookingApi) {
         houseService.unbookHouse(bookingApi);
         return "redirect:/HouseMain";
-    }
+    }*/
 }

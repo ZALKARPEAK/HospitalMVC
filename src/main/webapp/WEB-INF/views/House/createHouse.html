@@ -9,7 +9,7 @@
 
 <h1>Create House</h1>
 
-<form th:method="POST" th:action="@{save}" th:object="${newHouse}">
+<form th:method="POST"  th:action="@{/save/{agencyId}(agencyId=${agencyId})}" th:object="${newHouse}">
     <div class="mb-3 row">
         <label th:text="*{address}" for="address" class="col-sm-2 col-form-label">Address:</label>
         <div class="col-sm-10">
@@ -28,13 +28,10 @@
             <input th:field="*{description}" class="form-control" id="description" placeholder="Enter description" required>
         </div>
     </div>
-    <div>
-        <<label for="house type"><b>House Type</b></label>
-        <div>
-            <select th:field="*{houseType} " name="houseType" id="house type" required>
-                <option value="HOUSE">HOUSE</option>
-                <option value="APARTMENT">APARTMENT</option>
-            </select>
+    <div class="mb-3 row">
+        <label th:text="*{houseType}" for="houseType" class="col-sm-2 col-form-label">HouseType:</label>
+        <div class="col-sm-10">
+            <input th:field="*{houseType}" class="form-control" id="houseType" placeholder="Enter houseType" required>
         </div>
     </div>
     <div class="mb-3 row">
@@ -50,9 +47,10 @@
         </div>
     </div>
     <div class="mb-3 row">
-        <label th:text="*{agency}" for="agency" class="col-sm-2 col-form-label">Agency:</label>
+        <label th:text="*{agency}" for="agencyId" class="col-sm-2 col-form-label">Agency:</label>
         <div class="col-sm-10">
-            <input th:field="*{agency}" class="form-control" id="agency" placeholder="Enter agency" required>
+            <input th:field="*{agency.id}" class="form-control" id="agencyId" placeholder="Enter agencyId" required>
+
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
