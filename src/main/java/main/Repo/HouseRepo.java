@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface HouseRepo {
     void saveHouse(Long agencyId,House house);
-    List<House> getAllHouse();
+    List<House> getAllHouseByAgencyId(Long agencyId);
     House getHouseById(Long id);
     void updateHouseById(Long id,House house);
     void deleteHouseById(Long id) ;

@@ -37,7 +37,6 @@ public class CustomerRepoImpl implements CustomerRepo {
         }
     }
 
-    @Transactional
     @Override
     public void deleteCustomer(Long id) {
         Customer customer = entityManager.find(Customer.class, id);

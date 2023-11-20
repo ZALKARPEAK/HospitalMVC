@@ -57,7 +57,7 @@ public class AgencyApi {
     public String searchById(@RequestParam(name = "id") Long id, Model model) {
         Agency agency = agencyService.getById(id);
         if (agency == null) {
-            return "redirect:/assignCustomer/{id}";
+            return "redirect:/assignCustomer/"+id;
         }
         model.addAttribute("customer", customerService.getCustomerById(id));
         model.addAttribute("agencySearch", agency);

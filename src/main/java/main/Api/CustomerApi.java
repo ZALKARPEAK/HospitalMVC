@@ -2,7 +2,6 @@ package main.Api;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import main.Model.Agency;
 import main.Model.Customer;
 import main.Service.AgencyService;
 import main.Service.CustomerService;
@@ -75,5 +74,4 @@ public class CustomerApi {
         model.addAttribute("assignAgency", agencyService.getById(agencyId));
         return "redirect:/CustomerMain";
     }
-
 }

@@ -54,6 +54,8 @@ public class AgencyRepoImpl implements AgencyRepo {
             agency1.setPhoneNumber(agency.getPhoneNumber());
             agency1.setEmail(agency.getEmail());
             agency1.setImageLink(agency.getImageLink());
+            agency1.setHouses(agency.getHouses());
+            agency1.setCustomers(agency.getCustomers());
             entityManager.merge(agency1);
         }
     }
@@ -65,7 +67,7 @@ public class AgencyRepoImpl implements AgencyRepo {
         if (agencyToRemove != null) {
             List<House> associatedHouses = agencyToRemove.getHouses();
             for (House house : associatedHouses) {
-                house.setAgency(null);  // Set the agency to null
+                house.setAgency(null);
             }
 
             entityManager.remove(agencyToRemove);

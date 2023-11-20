@@ -62,10 +62,34 @@
                         <button type="submit" class="btn btn-danger btn-delete">Delete</button>
                     </form>
 
-                    <form th:method="PUT" th:action="@{/CustomerMain/{customerId}/{agencyId}/assign(customerId=${customer.id},
-                         agencyId=${agencySearch.id})}" class="d-inline">
-                        <button type="submit" class="btn btn-assign" >Assign</button>
+                    <form th:method="PUT" th:action="@{/CustomerMain/{customerId}/{agencyId}/assign}" class="d-inline">
+                        <label>
+                            <input th:type="hidden" th:name="customerId" th:value="customer.id">
+                        </label>
+                        <label>
+                            <input th:type="hidden" th:name="agencyId" th:value="agencySearch.id">
+                        </label>
+                        <button th:type="button" class="btn btn-assign" onclick="submitForm">Assign</button>
                     </form>
+
+                     <script>
+                         function submitForm() {
+                             var form = document.getElementById("assignForm");
+                             var formData = new FormData(form);
+
+                             var xhr = new XMLHttpRequest();
+                             xhr.open("PUT", form.action, true);
+                             xhr.onload = function () {
+                                 if (xhr.status === 200) {
+                                     window.location.href = "/CustomerMain";
+                                 } else {
+                                     console.error(xhr.statusText);
+                                 }
+                             };
+                             xhr.send(formData);
+                         }
+                     </script>
+
 
                 </div>
             </div>
@@ -75,3 +99,5 @@
 
 </body>
 </html>
+
+

@@ -22,8 +22,8 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<House> getAllHouse() {
-        return houseRepo.getAllHouse();
+    public List<House> getAllHouseByAgencyId(Long agencyId) {
+        return houseRepo.getAllHouseByAgencyId(agencyId);
     }
 
     @Override
