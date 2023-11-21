@@ -11,12 +11,11 @@ import java.util.List;
 @Service
 public class AgencyServiceImpl implements AgencyService {
 
-    private final AgencyRepo agencyRepo;
 
     @Autowired
-    public AgencyServiceImpl(AgencyRepo agencyRepo) {
-        this.agencyRepo = agencyRepo;
-    }
+    private AgencyRepo agencyRepo;
+
+
 
     @Override
     public void saveAgency(Agency agency) {
@@ -46,5 +45,10 @@ public class AgencyServiceImpl implements AgencyService {
     @Override
     public List<Agency> searchAgency(String word) {
         return agencyRepo.searchAgency(word);
+    }
+
+    @Override
+    public void assignCustomerToAgency(Long agencyId, List<Long> customerIds){
+        agencyRepo.assignCustomerToAgency(agencyId, customerIds);
     }
 }

@@ -1,5 +1,6 @@
 package main.Api;
 
+import lombok.RequiredArgsConstructor;
 import main.Model.House;
 import main.Service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/HouseMain/{agencyId}")
+@RequiredArgsConstructor
 public class HouseApi {
 
     private final HouseService houseService;
 
-    @Autowired
-    public HouseApi(HouseService houseService) {
-        this.houseService = houseService;
-    }
 
     @GetMapping
     public String getAllHouse(@PathVariable("agencyId") Long agencyId, Model model) {

@@ -7,14 +7,17 @@ import main.Model.Customer;
 import main.Model.House;
 import main.Repo.HouseRepo;
 import main.Service.HouseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+
 public class HouseServiceImpl implements HouseService {
-    private final HouseRepo houseRepo;
+
+    @Autowired
+    private  HouseRepo houseRepo;
 
     @Override
     public void saveHouse(Long agencyId, House house) {
@@ -24,6 +27,11 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<House> getAllHouseByAgencyId(Long agencyId) {
         return houseRepo.getAllHouseByAgencyId(agencyId);
+    }
+
+    @Override
+    public List<House> getAllHouseByAgencyId() {
+        return houseRepo.getAllHouseByAgencyId();
     }
 
     @Override
@@ -58,4 +66,11 @@ public class HouseServiceImpl implements HouseService {
     public void unbookHouse(BookingApi bookingApi) {
         bookingApi.unbook();
     }
+
+    @Override
+    public void saveHouse1(House house1){
+        houseRepo.saveHouse1(house1);
+    }
+
+
 }

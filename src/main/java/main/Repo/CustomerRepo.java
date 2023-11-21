@@ -10,4 +10,5 @@ public interface CustomerRepo {
     void deleteCustomer(Long id);
     Customer getCustomerById(Long id);
     List<Customer> getAllCustomer();
+
 }

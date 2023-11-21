@@ -16,4 +16,5 @@ public interface AgencyRepo {
     void deleteById(Long id);
 
     List<Agency> searchAgency(String word);
+    void assignCustomerToAgency(Long agencyId, List<Long> customerIds);
 }

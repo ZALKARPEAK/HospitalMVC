@@ -30,6 +30,7 @@
                     <a th:method="GET" th:href="@{HouseMain/edit/{houseId}(houseId=${house.getId()})}"
                        class="btn btn-outline-info">Update</a>
                     <br>
+
                     <form id="deleteForm" th:method="DELETE" th:action="@{/HouseMain/{agencyId}/{houseId}/deleteHouse(agencyId=${agencyId}, houseId=${house.getId()})}">
                         <button type="submit" class="btn btn-danger">DELETE</button>
                     </form>

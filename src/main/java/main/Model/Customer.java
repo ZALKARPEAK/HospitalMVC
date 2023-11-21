@@ -32,18 +32,24 @@ public class Customer extends Id {
 
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
     private List<Booking> booking;
+    @ManyToOne
+    private Agency agency;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    /*@ManyToMany(fetch = FetchType.EAGER)
     private List<Agency> agency;
+
+     */
 
     public Customer() {
     }
-    public void addAgency(Agency c){
+   /* public void addAgency(Agency c){
         if (this.agency == null) {
             agency = new ArrayList<>();
         }
         agency.add(c);
     }
+
+    */
 
 
     @Override

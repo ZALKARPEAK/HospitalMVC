@@ -40,16 +40,15 @@ public class HouseRepoImpl implements HouseRepo {
     }
 
     @Override
+    public List<House> getAllHouseByAgencyId() {
+        return entityManager.createQuery("SELECT h FROM House h ", House.class)
+                .getResultList();
+    }
+
+
+    @Override
     public House getHouseById(Long id) {
-        try {
-            House house = entityManager.find(House.class, id);
-            if (house.getId().equals(id)) {
-                return house;
-            }
-        } catch (HibernateException e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
+            return entityManager.find(House.class, id);
     }
 
     @Override
@@ -97,5 +96,10 @@ public class HouseRepoImpl implements HouseRepo {
     public List<House> searchHouse(String word) {
         return entityManager.createQuery("select u from House u where u.address like :word", House.class)
                 .setParameter("word", word).getResultList();
+    }
+
+    @Override
+    public void saveHouse1(House house1) {
+        entityManager.persist(house1);
     }
 }

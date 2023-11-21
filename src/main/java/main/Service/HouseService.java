@@ -9,6 +9,7 @@ import java.util.List;
 public interface HouseService {
     void saveHouse(Long agencyId,House house);
     List<House> getAllHouseByAgencyId(Long agencyId);
+    List<House> getAllHouseByAgencyId();
     House getHouseById(Long id);
     void updateHouseById(Long id,House house);
     void deleteHouseById(Long id) ;
@@ -16,4 +17,6 @@ public interface HouseService {
     List<House> searchHouse(String word);
     void bookHouse(BookingApi bookingApi);
     void unbookHouse(BookingApi bookingApi);
+
+    void saveHouse1(House house1);
 }

@@ -97,6 +97,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-success mr-2" th:href="@{/AgencyMain/{id}/update-rm (id=${agency.getId()})}">Update</a>
+                            <a th:href="@{/AgencyMain/{getById}/get/booking (getById=${agency.getId()})}">Assign</a>
+                            <a th:href="@{/CustomerMain/{getById}/get/booking (getById=${agency.getId()})}">Booking</a>
+
                         </li>
                     </ul>
                 </div>

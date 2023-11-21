@@ -6,17 +6,22 @@ import main.Model.Agency;
 import main.Model.Customer;
 import main.Repo.AgencyRepo;
 import main.Repo.CustomerRepo;
+import main.Service.AgencyService;
 import main.Service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+
 public class CustomerServiceImpl implements CustomerService {
 
-    private final CustomerRepo customerRepo;
-    private final AgencyRepo agencyRepo;
+
+    @Autowired
+    private CustomerRepo customerRepo;
+
+
     @Override
     public void saveCustomer(Customer customer) {
         customerRepo.saveCustomer(customer);
@@ -38,11 +43,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> getAllCustomer(){
+    public List<Customer> getAllCustomer() {
         return customerRepo.getAllCustomer();
     }
 
-    @Transactional
+}
+
+    /*@Transactional
     @Override
     public void assign(Long customerId, Long agencyId) {
         Agency agency = agencyRepo.getById(agencyId);
@@ -55,6 +62,12 @@ public class CustomerServiceImpl implements CustomerService {
             if (!customer.getAgency().contains(agency)) {
                 customer.getAgency().add(agency);
             }
+
+            agencyService.saveAgency(agency);
         }
+
+
     }
 }
+
+     */

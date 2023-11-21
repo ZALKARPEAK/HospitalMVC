@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/AgencyMain")
 @RequiredArgsConstructor
@@ -57,10 +59,30 @@ public class AgencyApi {
     public String searchById(@RequestParam("id") Long id, Model model) {
         Agency agency = agencyService.getById(id);
         if (agency == null) {
-            return "redirect:/assignCustomer/"+id;
+            return "redirect:/AgencyMain/"+id;
         }
         model.addAttribute("customer", customerService.getCustomerById(id));
         model.addAttribute("agencySearch", agency);
         return "/Agency/profileAgency";
+    }
+
+    @GetMapping("/{getById}/get/booking")
+    public String showAndAssignCustomer(
+            @PathVariable Long getById,
+            Model model
+    ) {
+        Agency agency = agencyService.getById(getById);
+        List<Customer> customer = customerService.getAllCustomer();
+        model.addAttribute("getAgencyById", agency);
+        model.addAttribute("customer", customer);
+        return "/Customer/getById1";
+    }
+
+
+    @PostMapping("/{getById}/get/booking")
+    public String assignCustomer(@RequestParam List<Long> customerId, @PathVariable Long getById){
+        Customer customer = customerService.getCustomerById(getById);
+        agencyService.assignCustomerToAgency(customer.getId(), customerId);
+        return "redirect:/AgencyMain";
     }
 }

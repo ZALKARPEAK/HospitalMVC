@@ -319,8 +319,6 @@
                 <p class="card-text" th:text="${customer.getGender()}">Gender:</p>
                 <div class="d-flex justify-content-end">
 
-                    <a th:href="@{/CustomerMain/assignCustomers/{id}(id=${customer.getId()})}" class="btn btn-primary mr-2">Assign</a>
-
                     <a th:href="@{/CustomerMain/{id}/update(id=${customer.getId()})}" class="btn btn-success mr-2">Update</a>
 
                     <form id="deleteForm" th:method="DELETE" th:action="@{/CustomerMain/{id}/delete(id=${customer.getId()})}">

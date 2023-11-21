@@ -30,17 +30,10 @@ public class Agency extends Id {
     @OneToMany(mappedBy = "agency",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.PERSIST})
     private List<House> houses;
 
-    @ManyToMany(mappedBy = "agency",cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "agency",cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Customer> customers;
 
     public Agency() {
-    }
-
-    public void addCustomer(Customer c){
-        if (this.customers == null) {
-            customers = new ArrayList<>();
-        }
-        customers.add(c);
     }
 
     @Override
