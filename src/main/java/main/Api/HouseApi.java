@@ -1,9 +1,7 @@
 package main.Api;
 
-import jakarta.persistence.PersistenceContext;
 import main.Model.House;
 import main.Service.HouseService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,37 +25,35 @@ public class HouseApi {
     }
 
     @GetMapping("/new")
-    public String createHouse(@PathVariable Long agencyId ,Model model) {
+    public String createHouse(@PathVariable Long agencyId, Model model) {
         model.addAttribute("agencyId", agencyId);
         model.addAttribute("house", new House());
         return "/House/createHouse";
     }
 
     @PostMapping("/save")
-    public String saveHouse(@PathVariable Long agencyId,@ModelAttribute("house")House house) {
+    public String saveHouse(@PathVariable Long agencyId, @ModelAttribute("house") House house) {
         houseService.saveHouse(agencyId, house);
         return "redirect:/HouseMain/" + agencyId;
     }
 
-    @PostMapping("/{houseId}/edit")
-    public String updateHouse(@PathVariable("agencyId") Long id, Model model,@PathVariable Long agencyId) {
-        model.addAttribute("house",houseService.getHouseById(id));
-        model.addAttribute("agencyId",agencyId);
+    @GetMapping("/edit/{houseId}")
+    public String edit(@PathVariable("houseId") Long id, Model model) {
+        model.addAttribute("house", houseService.getHouseById(id));
         return "/House/updateHouse";
     }
 
-    @PostMapping("/{houseId}/update")
-    public String saveUpdate(@ModelAttribute("house") House house,
-                             @PathVariable("houseId") Long id,
-                             @PathVariable("agencyId")Long agencyId) {
-        houseService.updateHouseById(id, house);
+    @PostMapping("/update/{houseId}")
+    public String update(@ModelAttribute("house") House house, @PathVariable Long agencyId, @PathVariable Long houseId) {
+        houseService.updateHouseById(houseId, house);
         return "redirect:/HouseMain/" + agencyId;
     }
 
+
     @DeleteMapping("/{houseId}/deleteHouse")
-    public String delete(@PathVariable("houseId") Long houseId,@PathVariable("agencyId") Long agencyId) {
+    public String delete(@PathVariable("houseId") Long houseId, @PathVariable Long agencyId) {
         houseService.deleteHouseById(houseId);
-        return "redirect:/HouseMain";
+        return "redirect:/HouseMain/"+agencyId;
     }
 
 }

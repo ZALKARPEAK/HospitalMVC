@@ -19,12 +19,13 @@ import java.util.Objects;
 public class HouseRepoImpl implements HouseRepo {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public void saveHouse(Long agencyId, House house) {
         Agency agency = entityManager.find(Agency.class, agencyId);
-        if (agency.getHouses()!=null){
+        if (agency.getHouses() != null) {
             agency.getHouses().add(house);
-        }else {
+        } else {
             agency.setHouses(Collections.singletonList(house));
         }
         house.setAgency(agency);
@@ -53,27 +54,17 @@ public class HouseRepoImpl implements HouseRepo {
 
     @Override
     public void updateHouseById(Long id, House house) {
-        try {
-            boolean x = false;
-            for (House house1 : entityManager.createQuery("select a from House a", House.class).getResultList()) {
-                if (Objects.equals(house1.getId(), id)) {
-                    x = true;
-                    break;
-                }
-            }
-            if (x) {
-                House house1 = entityManager.find(House.class, id);
-                house1.setAddress(house.getAddress());
-                house1.setPrice(house.getPrice());
-                house1.setRoom(house.getRoom());
-                house1.setCountry(house.getCountry());
-                house1.setDescription(house.getDescription());
-                house1.setRoom(house.getRoom());
-                entityManager.merge(house1);
-            }
-        } catch (HibernateException e) {
-            System.out.println(e.getMessage());
-        }
+        House house1 = getHouseById(id);
+
+        house1.setAddress(house.getAddress());
+        house1.setPrice(house.getPrice());
+        house1.setRoom(house.getRoom());
+        house1.setCountry(house.getCountry());
+        house1.setDescription(house.getDescription());
+        house1.setRoom(house.getRoom());
+        house1.setHouseType(house.getHouseType());
+        house1.setBooking(house.getBooking());
+        entityManager.merge(house1);
     }
 
     @Override

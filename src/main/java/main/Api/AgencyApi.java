@@ -54,7 +54,7 @@ public class AgencyApi {
     }
 
     @GetMapping("/search")
-    public String searchById(@RequestParam(name = "id") Long id, Model model) {
+    public String searchById(@RequestParam("id") Long id, Model model) {
         Agency agency = agencyService.getById(id);
         if (agency == null) {
             return "redirect:/assignCustomer/"+id;

@@ -51,16 +51,6 @@ public class CustomerApi {
         return "redirect:/CustomerMain";
     }
 
-    @GetMapping("/search")
-    public String searchById(@RequestParam(name = "id") Long id, Model model) {
-        Customer customer = customerService.getCustomerById(id);
-        if (customer == null) {
-            return "redirect:/CustomerMain";
-        }
-        model.addAttribute("customerSearch", customer);
-        return "/Customer/profileCustomer";
-    }
-
     @GetMapping("/assignCustomers/{id}")
     public String assignCustomer(@PathVariable("id") Long id, Model model){
         model.addAttribute("assignCustomer", customerService.getCustomerById(id));

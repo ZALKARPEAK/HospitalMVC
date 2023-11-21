@@ -15,6 +15,7 @@ import main.Model.id.Id;
 @AllArgsConstructor
 public class House extends Id {
     @NotNull
+    @Enumerated(EnumType.STRING)
     private HouseType houseType;
     @NotNull
     private String address;
